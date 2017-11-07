@@ -4,9 +4,8 @@ use App\Controller;
 class ErrorsController extends Controller
 {
     public function index(){
-        $var['title'] = "Errors";
-        //$this->Views->set($var);
-        $this->Views->render('errors', '404',$var);
+        $title = "Errors";
+        $this->Views->render('errors', '404',compact('title'));
         die();
     }
 }
