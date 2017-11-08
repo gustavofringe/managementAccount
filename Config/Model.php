@@ -232,7 +232,7 @@ class Model
             $sql = 'INSERT INTO ' . $table . ' SET ' . implode(',', $fields);
             $action = 'insert';
         }
-        return $sql;
+        //return $sql;
         //prepare request
         $pre = $this->db->prepare($sql);
         //execute request

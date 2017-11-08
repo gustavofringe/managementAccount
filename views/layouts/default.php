@@ -18,54 +18,58 @@
 <body>
 
 <header class="">
-      <nav class="navbar navbar-toggleable-md navbar-inverse bg-inverse">
-    
+    <nav class="navbar navbar-toggleable-md navbar-inverse bg-inverse">
 
-      <h1 class="navbar-brand mr-5 title">Gestion de compte bancaire</h1>
-    <div class="collapse navbar-collapse" id="navbarsExampleDefault">
-        <ul class="navbar-nav mr-auto">
-            <li class="nav-item active">
-                <a class="nav-link" href="<?php echo BASE_URL; ?>"><span class="sr-only">(current)</span></a>
-            </li>
-            <li class="nav-item active">
-                <a class="nav-link" href="<?php echo BASE_URL; ?>/blog"></a>
-            </li>
-        </ul>
-        <?php if($_REQUEST['url']):?>
-        <ul class="my-2 my-lg-0 navbar-nav">
+
+        <h1 class="navbar-brand mr-5 title">Gestion de compte bancaire</h1>
+        <div class="collapse navbar-collapse" id="navbarsExampleDefault">
+            <ul class="navbar-nav mr-auto">
                 <li class="nav-item active">
-                    <a class="nav-link" href="<?= BASE_URL; ?>users/login.php">Virements<span
-                                class="sr-only">(current)</span></a>
+                    <a class="nav-link" href="<?php echo BASE_URL; ?>"><span class="sr-only">(current)</span></a>
                 </li>
                 <li class="nav-item active">
-                    <a class="nav-link" href="<?= BASE_URL; ?>/posts/create">Créer un nouveau compte</a>
+                    <a class="nav-link" href="<?php echo BASE_URL; ?>/blog"></a>
                 </li>
-        </ul>
-<?php endif;?>
-    </div>
-    <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse"
-            data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false"
-            aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-    </button>
-</nav>
+            </ul>
+            <?php if ($_REQUEST['url']): ?>
+                <ul class="my-2 my-lg-0 navbar-nav">
+                    <li class="nav-item active">
+                        <a class="nav-link" href="<?= BASE_URL; ?>users/login.php">Virements<span
+                                    class="sr-only">(current)</span></a>
+                    </li>
+                    <li class="nav-item active">
+                        <a class="nav-link" href="<?= BASE_URL; ?>/posts/create">Créer un nouveau compte</a>
+                    </li>
+                </ul>
+            <?php endif; ?>
+        </div>
+        <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse"
+                data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false"
+                aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+    </nav>
 </header>
 
 <div class="container" id="container">
-        <!-- /.header -->
-<?php echo App\Session::flash();?>
+    <!-- /.header -->
+    <?php echo App\Session::flash(); ?>
 
 
-            <main>
-                <?php echo $content; ?>
-            </main>
+    <main>
+        <?php echo $content; ?>
+    </main>
 
 </div>
-            <footer>
-                <nav class="navbar navbar-toggleable-md navbar-inverse bg-inverse">
-                <p class="navbar-brand ml-5">@Cash bank</p>
-</nav>
-            </footer>
+<footer class="footer">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <p class="text-center" id="text">@Cash bank</p>
+            </div>
+        </div>
+    </div>
+</footer>
 <script src="<?php echo BASE_URL; ?>/public/js/jquery-3.2.1.min.js"></script>
 
 <script src="<?php echo BASE_URL; ?>/public/js/bootstrap.js"></script>

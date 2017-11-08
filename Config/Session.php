@@ -66,6 +66,7 @@ class Session
             ?>
             <div class="alert alert-<?= $_SESSION['flash']['type']; ?>">
                 <?= $_SESSION['flash']['message']; ?>
+                <div class="close">X</div>
             </div>
             <?php
         }
