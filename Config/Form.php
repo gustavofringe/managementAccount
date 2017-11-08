@@ -27,7 +27,7 @@ class Form
         if(!isset($options['type']) && !isset($options['options'])){
             $html .= '<input type="text" class='.$options['class'].' id="'.$name.'" name="'.$name.'" placeholder= "'.$place.'"" value="'.$value.'"'.$opt.'>';
         }elseif(isset($options['options'])){
-            $html .= '<select id="'.$name.'" name="'.$name.'">';
+            $html .= '<select id="'.$name.'" name="'.$name.'" class="'.$options['select'].'">';
             foreach($options['options'] as $k=>$v){
                 $html .= '<option value="'.$k.'" '.($k==$value?'selected':'').'>'.$v.'</option>';
             }

@@ -286,3 +286,7 @@ footer{
     right: 0;
     left: 0;
 }
+#button{
+    width: 120px;
+    margin: 0 auto;
+}
