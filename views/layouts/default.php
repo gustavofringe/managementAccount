@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
-    <title><?= $title; ?></title>
+    <title><?php echo $title; ?></title>
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link href="https://fonts.googleapis.com/css?family=Raleway:100,600" rel="stylesheet" type="text/css">
@@ -11,39 +11,81 @@
     <link href="https://fonts.googleapis.com/css?family=Didact+Gothic|Maven+Pro" rel="stylesheet">
 
     <!-- Place favicon.ico in the root directory -->
-    <link rel="icon" href="<?= BASE_URL; ?>/public/img/favicon.ico"/>
-    <link rel="stylesheet" href="<?= BASE_URL; ?>/public/css/bootstrap.css">
+    <link rel="icon" href="<?php echo BASE_URL; ?>/public/img/favicon.ico"/>
+    <link rel="stylesheet" href="<?php echo BASE_URL; ?>/public/css/bootstrap.css">
+    <link rel="stylesheet" href="<?php echo BASE_URL; ?>/public/css/main.css">
 </head>
 <body>
-<div class="site-container">
-    <div class="site-pusher">
+<header class="header clearfix">
+      <nav class="navbar navbar-toggleable-md navbar-inverse bg-inverse">
+    <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse"
+            data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false"
+            aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
 
+    <div class="collapse navbar-collapse" id="navbarsExampleDefault">
+        <h1 class="navbar-brand mr-5">Gestion de compte bancaire</h1>
+        <ul class="navbar-nav mr-auto">
+            <li class="nav-item active">
+                <a class="nav-link" href="<?php echo BASE_URL; ?>"><span class="sr-only">(current)</span></a>
+            </li>
+            <li class="nav-item active">
+                <a class="nav-link" href="<?php echo BASE_URL; ?>/blog"></a>
+            </li>
+        </ul>
+
+        <ul class="my-2 my-lg-0 navbar-nav">
+                <li class="nav-item active">
+                    <a class="nav-link" href="<?= BASE_URL; ?>users/login.php">Virements<span
+                                class="sr-only">(current)</span></a>
+                </li>
+                <li class="nav-item active">
+                    <a class="nav-link" href="<?= BASE_URL; ?>/user">Créer un nouveau compte</a>
+                </li>
+        </ul>
+    </div>
+</nav>
+</header>
+
+<div class="container">
         <!-- /.header -->
 <?php echo App\Session::flash();?>
 
 
-        <div class="site-content">
-            <main class="container">
-                <?= $content; ?>
+            <main>
+                <?php echo $content; ?>
             </main>
-            <div class="site-cache" id="site-cache"></div>
-            <!-- /.site-cache -->
-            <footer>
-                <div class="container">
 
-                </div>
+</div>
+            <footer>
+                <nav class="navbar navbar-toggleable-md navbar-inverse bg-inverse">
+    <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse"
+            data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false"
+            aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarsExampleDefault">
+        <p class="navbar-brand mr-5">@Cash bank</p>
+        <ul class="navbar-nav mr-auto">
+            <li class="nav-item active">
+                <a class="nav-link" href="<?php echo BASE_URL; ?>"><span class="sr-only">(current)</span></a>
+            </li>
+            <li class="nav-item active">
+                <a class="nav-link" href="<?php echo BASE_URL; ?>/blog"></a>
+            </li>
+        </ul>
+
+        
+    </div>
+</nav>
                 <!-- /.container -->
             </footer>
-        </div>
-        <!-- /.site-content -->
-    </div>
-    <!-- /.site-pusher -->
-</div>
-<!-- /.site-container -->
+<script src="<?php echo BASE_URL; ?>/public/js/jquery-3.2.1.min.js"></script>
 
-<script src="<?= BASE_URL; ?>/public/js/jquery-3.2.1.min.js"></script>
-<script src="<?= BASE_URL; ?>/public/js/main.js"></script>
-<script src="<?= BASE_URL; ?>/public/js/bootstrap.js"></script>
+<script src="<?php echo BASE_URL; ?>/public/js/bootstrap.js"></script>
+<script src="<?php echo BASE_URL; ?>/public/js/main.js"></script>
 
 <!-- Google Analytics: change UA-XXXXX-X to be your site's ID. -->
 <script>

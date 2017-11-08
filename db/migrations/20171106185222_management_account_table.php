@@ -30,7 +30,7 @@ class ManagementAccountTable extends AbstractMigration
     {
         $this->table('accounts',['id'=>'accountID'])
             ->addColumn('name','string')
-            ->addColumn('amount','float')
+            ->addColumn('balance','float')
             ->create();
     }
 }
