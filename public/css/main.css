@@ -280,13 +280,9 @@ textarea {
         page-break-after: avoid;
     }
 }
-footer{
-    position: absolute;
-    bottom: 0;
-    right: 0;
-    left: 0;
-}
-#button{
-    width: 120px;
-    margin: 0 auto;
-}
+
+@media screen and (max-width: 320px){
+    .title{
+        font-size: 14px;
+    }
+} 

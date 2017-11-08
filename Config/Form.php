@@ -9,8 +9,8 @@ class Form
     public function __construct($controller){
         self::$controller = $controller;
     }
-    public static function open(){
-        $form = "<form method='post'  enctype='multipart/form-data'>";
+    public static function open($class = null){
+        $form = "<form method='post'  enctype='multipart/form-data' class='$class'>";
         echo $form;
     }
     public static function input($name,$label,$options = array(),$place=null,$value=null,$opt=null){

@@ -4,9 +4,9 @@ class Conf{
     static $databases = [
         'default' =>[
             'host'      =>'localhost',
-            'database'  =>'portfolio',
+            'database'  =>'managementAccount',
             'login'     =>'root',
-            'password'  =>'ava210709'
+            'password'  =>'root'
         ],
         'distrib' =>[
             'host'      =>'',

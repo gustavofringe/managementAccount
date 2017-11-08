@@ -16,16 +16,13 @@
     <link rel="stylesheet" href="<?php echo BASE_URL; ?>/public/css/main.css">
 </head>
 <body>
-<header class="header clearfix">
-      <nav class="navbar navbar-toggleable-md navbar-inverse bg-inverse">
-    <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse"
-            data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false"
-            aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-    </button>
 
+<header class="">
+      <nav class="navbar navbar-toggleable-md navbar-inverse bg-inverse">
+    
+
+      <h1 class="navbar-brand mr-5 title">Gestion de compte bancaire</h1>
     <div class="collapse navbar-collapse" id="navbarsExampleDefault">
-        <h1 class="navbar-brand mr-5">Gestion de compte bancaire</h1>
         <ul class="navbar-nav mr-auto">
             <li class="nav-item active">
                 <a class="nav-link" href="<?php echo BASE_URL; ?>"><span class="sr-only">(current)</span></a>
@@ -46,10 +43,15 @@
         </ul>
 <?php endif;?>
     </div>
+    <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse"
+            data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false"
+            aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
 </nav>
 </header>
 
-<div class="container">
+<div class="container" id="container">
         <!-- /.header -->
 <?php echo App\Session::flash();?>
 
@@ -61,27 +63,8 @@
 </div>
             <footer>
                 <nav class="navbar navbar-toggleable-md navbar-inverse bg-inverse">
-    <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse"
-            data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false"
-            aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-    </button>
-
-    <div class="collapse navbar-collapse" id="navbarsExampleDefault">
-        <p class="navbar-brand mr-5">@Cash bank</p>
-        <ul class="navbar-nav mr-auto">
-            <li class="nav-item active">
-                <a class="nav-link" href="<?php echo BASE_URL; ?>"><span class="sr-only">(current)</span></a>
-            </li>
-            <li class="nav-item active">
-                <a class="nav-link" href="<?php echo BASE_URL; ?>/blog"></a>
-            </li>
-        </ul>
-
-        
-    </div>
+                <p class="navbar-brand ml-5">@Cash bank</p>
 </nav>
-                <!-- /.container -->
             </footer>
 <script src="<?php echo BASE_URL; ?>/public/js/jquery-3.2.1.min.js"></script>
 

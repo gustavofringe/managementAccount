@@ -10,11 +10,19 @@
     </tr>
   </thead>
   <tbody>
+    <?php foreach($accounts as $account):?>
     <tr>
-      <th scope="row">1</th>
-      <td>Mark</td>
-      <td>Otto</td>
+      <th scope="row"><?php echo $account->name;?></th>
+      <td><?php echo $account->balance;?> €</td>
+      <td>
+      <div class="btn-group-vertical">
+      <a class="btn btn-secondary" href="<?php echo BASE_URL;?>/posts/add/<?php echo $account->accountID;?>">Créditer</a>
+      <a class="btn btn-secondary" href="<?php echo BASE_URL;?>/posts/sub">Débiter</a>
+      </div>
+      <a class="btn btn-danger" href="<?php echo BASE_URL;?>/posts/delete">Supprimer</a>
+      </td>
     </tr>
+<?php endforeach;?>
   </tbody>
 </table>
     </div>
