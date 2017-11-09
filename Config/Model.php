@@ -211,7 +211,7 @@ class Model
      * @param $table
      * @param $datas
      */
-    public function save($table, $datas)
+    public function save($table, $datas=array())
     {
         $key = substr($table, 0, -1) . 'ID';
         $fields = [];
@@ -232,7 +232,7 @@ class Model
             $sql = 'INSERT INTO ' . $table . ' SET ' . implode(',', $fields);
             $action = 'insert';
         }
-        //return $sql;
+        //return $data;
         //prepare request
         $pre = $this->db->prepare($sql);
         //execute request

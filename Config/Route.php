@@ -20,6 +20,7 @@ class Route
         if (empty($this->url[0])) {
             $this->loadControllerDefault();
         } elseif (!empty($this->url[0])) {
+            $this->loadEntity();
             $this->loadController();
             $this->methodExist();
         } else {
@@ -61,6 +62,12 @@ class Route
         } else {
             $this->errors();
             die();
+        }
+    }
+    private function loadEntity(){
+        $page = ROOT.DS.'Entities'.DS.ucfirst($this->url[0]).'.php';
+        if(file_exists($page)){
+            require $page;
         }
     }
 

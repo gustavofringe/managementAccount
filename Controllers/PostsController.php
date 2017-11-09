@@ -1,6 +1,7 @@
 <?php
 namespace Http;
 use App\Controller;
+use Entity\Posts;
 
 class PostsController extends Controller{
     /**
@@ -14,8 +15,13 @@ class PostsController extends Controller{
         //verify entry
         if($this->Request->post){
             if($this->Post->validates($this->Request->post)){
+                $accounts = new Posts(get_object_vars($this->Request->post));
                 //save in database
-                $this->Post->save('accounts',$this->Request->post);
+                $post = $this->Post->save('accounts',[
+                    'name'=>$accounts->getName(),
+                    'balance'=>$accounts->getBalance()
+                    ]);
+
                 //flash message
                 $this->Session->setFlash('Votre compte est enregistré');
                 //redirection
@@ -39,6 +45,7 @@ class PostsController extends Controller{
         $account = $this->Post->findFirst('accounts',[
             'conditions'=>['accountID'=>$id]
         ]);
+        $account = new Posts(get_object_vars($account));
         if($this->Request->post){
             //validate entry
             if($this->Post->validates($this->Request->post)){
@@ -62,14 +69,15 @@ class PostsController extends Controller{
         $account = $this->Post->findFirst('accounts',[
             'conditions'=>['accountID'=>$id]
         ]);
-        if($account->balance >= -500) {
+        $account = new Posts(get_object_vars($account));
+        if($account->getBalance() >= -500) {
             if ($this->Request->post) {
                 //validate entry
                 if ($this->Post->validates($this->Request->post)) {
                     //define id account for update
                     $this->Request->post->accountID = $id;
                     //add money
-                    $this->Request->post->balance = $account->balance - $this->Request->post->balance;
+                    $this->Request->post->balance = $account->getBalance() - $this->Request->post->balance;
                     //update database
                     $this->Post->save('accounts', $this->Request->post);
                     //flash message & redirect
@@ -79,10 +87,31 @@ class PostsController extends Controller{
                 }
             }
         }else{
-            $this->Session->setFlash('Crédits insufisants','danger');
+            $this->Session->setFlash('Vous avez dépasser le seuil de votre découvert autorisé','danger');
             $this->Views->redirect(BASE_URL . '/pages/accounts');
             die();
         }
         $this->Views->render('posts','sub',compact('title','account'));
+    }
+    public function transfer(){
+        $title = "Virement";
+        $this->Views->render('posts','transfer',compact('title'));
+    }
+    public function delete($id){
+        $this->loadModel('Post');
+        $account = $this->Post->findFirst('accounts',[
+            'conditions'=>['accountID'=>$id]
+        ]);
+        $account = new Posts(get_object_vars($account));
+        if($account->getBalance>0){
+        $this->Post->delete('accounts',$id);
+        $this->Session->setFlash('Compte supprimer','danger');
+        $this->Views->redirect(BASE_URL.'/pages/accounts');
+        die();
+        }else{
+            $this->Session->setFlash('Le solde de votre compte est négatif','danger');
+            $this->Views->redirect(BASE_URL.'/pages/accounts');
+            die();
+        }
     }
 }

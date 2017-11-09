@@ -3,6 +3,13 @@ namespace App;
 class Controller
 
 {
+    public $Session;
+    public $Views;
+    public $Email;
+    public $Form;
+    public $Service;
+    public $Img;
+    public $Request;
 
     /**
      * load instance
@@ -17,6 +24,7 @@ class Controller
         $this->Service = new Service();
         $this->Img = new Img();
         $this->Request = new Request();
+        
     }
     /**
      * load model for validate form
@@ -31,6 +39,13 @@ class Controller
                 $this->$name->Form = $this->Form;
             }
         }
+    }
 
+    public function loadEntity($name, $value){
+        if(!isset($this->$name)){
+            $file = ROOT.DS.'Entities'.DS.$name.'.php';
+            require_once($file);
+            $this->$name = new $name($value);
+        }
     }
 }

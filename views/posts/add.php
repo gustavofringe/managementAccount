@@ -9,8 +9,8 @@
   </thead>
   <tbody>
   <tr>
-  <th scope="col"><?php echo $account->name;?></th>
-  <th scope="col"><?php echo $account->balance;?></th>
+  <th scope="col"><?php echo $account->getName();?></th>
+  <th scope="col"><?php echo $account->getBalance();?> €</th>
   </tr>
   </tbody>
   </table>
