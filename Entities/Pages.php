@@ -1,7 +1,7 @@
 <?php
 namespace Entity;
 
-class PagesManager{
+class Pages{
 
     protected $accountID;
     protected $name;

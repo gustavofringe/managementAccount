@@ -24,7 +24,7 @@
         <h1 class="navbar-brand mr-5 title">Gestion de compte bancaire</h1>
         <div class="collapse navbar-collapse" id="navbarsExampleDefault">
             <ul class="navbar-nav mr-auto">
-            <?php if ($_REQUEST['url']): ?>
+                <?php if ($_REQUEST['url']): ?>
                 <li class="nav-item active">
                     <a class="nav-link" href="<?php echo BASE_URL; ?>/pages/accounts">Home<span class="sr-only">(current)</span></a>
                 </li>
@@ -32,16 +32,16 @@
                     <a class="nav-link" href="<?php echo BASE_URL; ?>/blog"></a>
                 </li>
             </ul>
-            
-                <ul class="my-2 my-lg-0 navbar-nav">
-                    <li class="nav-item active">
-                        <a class="nav-link" href="<?= BASE_URL; ?>/posts/transfer">Virements<span
-                                    class="sr-only">(current)</span></a>
-                    </li>
-                    <li class="nav-item active">
-                        <a class="nav-link" href="<?= BASE_URL; ?>/posts/create">Créer un nouveau compte</a>
-                    </li>
-                </ul>
+
+            <ul class="my-2 my-lg-0 navbar-nav">
+                <li class="nav-item active">
+                    <a class="nav-link" href="<?php echo BASE_URL; ?>/posts/transfer">Virements<span
+                                class="sr-only">(current)</span></a>
+                </li>
+                <li class="nav-item active">
+                    <a class="nav-link" href="<?php echo BASE_URL; ?>/posts/create">Créer un nouveau compte</a>
+                </li>
+            </ul>
             <?php endif; ?>
         </div>
         <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse"
