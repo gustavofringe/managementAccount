@@ -5,6 +5,9 @@ use Entity\Pages;
 class PagesController extends Controller{
 
 
+    /**
+     *
+     */
     public function accounts(){
         //define title
         $title = "Mes comptes";

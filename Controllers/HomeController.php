@@ -4,6 +4,9 @@ use App\Controller;
 class HomeController extends Controller
 {
 
+    /**
+     *
+     */
     public function index(){
         $title = "Accueil";
         if($this->Request->post){

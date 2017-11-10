@@ -69,6 +69,9 @@ class PostsController extends Controller
         $this->Views->render('posts', 'add', compact('title', 'account'));
     }
 
+    /**
+     * @param $id
+     */
     public function sub($id)
     {
         $title = "Débiter le compte";
@@ -94,13 +97,16 @@ class PostsController extends Controller
                 }
             }
         } else {
-            $this->Session->setFlash('Vous avez dépasser le seuil de votre découvert autorisé', 'danger');
+            $this->Session->setFlash('Vous avez dépasser le seuil de votre découvert autorisé de 500€', 'danger');
             $this->Views->redirect(BASE_URL . '/pages/accounts');
             die();
         }
         $this->Views->render('posts', 'sub', compact('title', 'account'));
     }
 
+    /**
+     *
+     */
     public function transfer()
     {
         //title page
@@ -125,8 +131,8 @@ class PostsController extends Controller
                 ]);
                 $credited = new Posts(get_object_vars($credited));
                 //operation
-                $credit = $debiter->getBalance() - $this->Request->post->balance;
-                $debit = $credited->getBalance() + $this->Request->post->balance;
+                $debit = $debiter->getBalance() - $this->Request->post->balance;
+                $credit = $credited->getBalance() + $this->Request->post->balance;
                 //define accountID & balance
                 $this->Request->post->accountID = $this->Request->post->debiter;
                 $this->Request->post->balance = $debit;
@@ -136,7 +142,7 @@ class PostsController extends Controller
                 $this->Request->post->accountID = $this->Request->post->credited;
                 $this->Request->post->balance = $credit;
                 //save in database
-                $test = $this->Post->save('accounts',$this->Request->post);
+                $this->Post->save('accounts',$this->Request->post);
                 //message flash & redirect
                 $this->Session->setFlash('Le virement a été correctement effectué');
                 $this->Views->redirect(BASE_URL.'/pages/accounts');
@@ -148,6 +154,9 @@ class PostsController extends Controller
         $this->Views->render('posts', 'transfer', compact('title','accounts'));
     }
 
+    /**
+     * @param $id
+     */
     public function delete($id)
     {
         $this->loadModel('Post');

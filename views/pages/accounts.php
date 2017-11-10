@@ -1,4 +1,4 @@
-<h2 class="mt-4 text-center">Vos comptes</h2>
+<h2 class="mt-4 mb-4 text-center">Vos comptes</h2>
 
 
 
@@ -6,7 +6,7 @@
     <div class="col-md-12">
         <div class="table-responsive">
             <!--start table-->
-            <table class="table table-bordered table-hover mb-5" width="100%" cellspacing="0">
+            <table class="table table-bordered table-hover mb-5">
                 <thead>
                 <tr>
                     <th scope="col">Compte(s)</th>
@@ -18,9 +18,9 @@
                 <!--get datas-->
                 <?php foreach ($accounts as $account): ?>
                     <tr>
-                        <th scope="row"><?php echo $account->getName(); ?></th>
+                        <th><?php echo $account->getName(); ?></th>
                         
-                        <td scope="row"><div <?php echo $account->getBalance()>0?'':"style='color:red'";?>><?php echo $account->getBalance(); ?></div></td>
+                        <td><div <?php echo $account->getBalance()>0?'':"style='color:red'";?>><?php echo $account->getBalance(); ?></div></td>
                         <td>
                             <div class="btn-group-vertical">
                                 <a class="btn btn-secondary"
