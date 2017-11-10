@@ -113,8 +113,9 @@ class PostsController extends Controller
             $accounts[$k] = new Posts(get_object_vars($v));
         }
         if($this->Request->post){
-            //
+            //verify idem account
             if($this->Request->post->debiter != $this->Request->post->credited){
+                //find account for operations
                 $debiter = $this->Post->findFirst('accounts', [
                     'conditions' => ['accountID' => $this->Request->post->debiter]
                 ]);
@@ -123,17 +124,20 @@ class PostsController extends Controller
                     'conditions' => ['accountID' => $this->Request->post->credited]
                 ]);
                 $credited = new Posts(get_object_vars($credited));
+                //operation
                 $credit = $debiter->getBalance() - $this->Request->post->balance;
                 $debit = $credited->getBalance() + $this->Request->post->balance;
-                //dd($debit);
+                //define accountID & balance
                 $this->Request->post->accountID = $this->Request->post->debiter;
                 $this->Request->post->balance = $debit;
+                //save in database
                 $test = $this->Post->save('accounts',$this->Request->post);
-
+                //define accountID & balance
                 $this->Request->post->accountID = $this->Request->post->credited;
                 $this->Request->post->balance = $credit;
+                //save in database
                 $test = $this->Post->save('accounts',$this->Request->post);
-                //dd($test);
+                //message flash & redirect
                 $this->Session->setFlash('Le virement a été correctement effectué');
                 $this->Views->redirect(BASE_URL.'/pages/accounts');
                 die();
@@ -147,12 +151,16 @@ class PostsController extends Controller
     public function delete($id)
     {
         $this->loadModel('Post');
+        //find the current accounts
         $account = $this->Post->findFirst('accounts', [
             'conditions' => ['accountID' => $id]
         ]);
         $account = new Posts(get_object_vars($account));
+        //condition for delete
         if ($account->getBalance() > 0) {
+            //delete
             $this->Post->delete('accounts', $id);
+            //message & redirect
             $this->Session->setFlash('Compte supprimer', 'danger');
             $this->Views->redirect(BASE_URL . '/pages/accounts');
             die();

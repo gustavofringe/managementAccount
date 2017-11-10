@@ -14,14 +14,8 @@ class PagesController extends Controller{
         $accounts = $this->Post->findAll('accounts',[]);
         foreach($accounts as $k=>$v){
             $accounts[$k] = new Pages(get_object_vars($v));
-            //define color for negatif values
-            if($v->balance<0){
-                $color = 'red';
-            }/*else{
-                $color = 'black';
-            }*/
         }
 
-        $this->Views->render('pages','accounts',compact('title','accounts','color'));
+        $this->Views->render('pages','accounts',compact('title','accounts'));
     }
 }

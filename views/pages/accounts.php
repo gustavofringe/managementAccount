@@ -19,7 +19,8 @@
                 <?php foreach ($accounts as $account): ?>
                     <tr>
                         <th scope="row"><?php echo $account->getName(); ?></th>
-                        <td scope="row" style="color:<?php echo $color;?>" class="error"><?php echo $account->getBalance(); ?>€</td>
+                        
+                        <td scope="row"><div <?php echo $account->getBalance()>0?'':"style='color:red'";?>><?php echo $account->getBalance(); ?></div></td>
                         <td>
                             <div class="btn-group-vertical">
                                 <a class="btn btn-secondary"

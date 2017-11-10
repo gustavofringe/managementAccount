@@ -2,7 +2,9 @@ html {
     position: relative;
     min-height: 100%;
 }
-
+.red{
+    color:red !important;
+}
 .footer {
     position: absolute;
     bottom: 0;
