@@ -103,12 +103,43 @@ class PostsController extends Controller
 
     public function transfer()
     {
+        //title page
         $title = "Virement";
+        //load model
         $this->loadModel('Post');
+        //find all accounts
         $accounts = $this->Post->findAll('accounts',[]);
         foreach($accounts as $k=>$v){
             $accounts[$k] = new Posts(get_object_vars($v));
+        }
+        if($this->Request->post){
+            //
+            if($this->Request->post->debiter != $this->Request->post->credited){
+                $debiter = $this->Post->findFirst('accounts', [
+                    'conditions' => ['accountID' => $this->Request->post->debiter]
+                ]);
+                $debiter = new Posts(get_object_vars($debiter));
+                $credited = $this->Post->findFirst('accounts', [
+                    'conditions' => ['accountID' => $this->Request->post->credited]
+                ]);
+                $credited = new Posts(get_object_vars($credited));
+                $credit = $debiter->getBalance() - $this->Request->post->balance;
+                $debit = $credited->getBalance() + $this->Request->post->balance;
+                //dd($debit);
+                $this->Request->post->accountID = $this->Request->post->debiter;
+                $this->Request->post->balance = $debit;
+                $test = $this->Post->save('accounts',$this->Request->post);
 
+                $this->Request->post->accountID = $this->Request->post->credited;
+                $this->Request->post->balance = $credit;
+                $test = $this->Post->save('accounts',$this->Request->post);
+                //dd($test);
+                $this->Session->setFlash('Le virement a été correctement effectué');
+                $this->Views->redirect(BASE_URL.'/pages/accounts');
+                die();
+            }else{
+                $this->Session->setFlash("Vous ne pouvez pas faire de virements sur le même compte","danger");
+            }
         }
         $this->Views->render('posts', 'transfer', compact('title','accounts'));
     }

@@ -31,6 +31,8 @@ class ManagementAccountTable extends AbstractMigration
         $this->table('accounts',['id'=>'accountID'])
             ->addColumn('name','string')
             ->addColumn('balance','string')
+            ->addColumn('credited','integer')
+            ->addColumn('debiter','integer')
             ->create();
     }
 }
