@@ -3,6 +3,7 @@
 namespace Http;
 
 use App\Controller;
+use function dd;
 use Entity\Posts;
 
 class PostsController extends Controller
@@ -12,6 +13,8 @@ class PostsController extends Controller
      */
     public function create()
     {
+
+        $this->Session->isLogged('user');
         //title page
         $title = "Nouveau compte";
         //load model for validate
@@ -23,9 +26,13 @@ class PostsController extends Controller
                 //save in database
                 $this->Post->save('accounts', [
                     'name' => $accounts->getName(),
-                    'balance' => $accounts->getBalance()
+                    'balance' => $accounts->getBalance(),
+                    'debiter' => 0,
+                    'credited' => 0,
+                    'userID' => $this->Request->session->user->userID
                 ]);
-
+                //change session getAccount for display page without error
+                $this->Session->write('getAccount', true);
                 //flash message
                 $this->Session->setFlash('Votre compte est enregistré');
                 //redirection
@@ -114,13 +121,13 @@ class PostsController extends Controller
         //load model
         $this->loadModel('Post');
         //find all accounts
-        $accounts = $this->Post->findAll('accounts',[]);
-        foreach($accounts as $k=>$v){
+        $accounts = $this->Post->findAll('accounts', []);
+        foreach ($accounts as $k => $v) {
             $accounts[$k] = new Posts(get_object_vars($v));
         }
-        if($this->Request->post){
+        if ($this->Request->post) {
             //verify idem account
-            if($this->Request->post->debiter != $this->Request->post->credited){
+            if ($this->Request->post->debiter != $this->Request->post->credited) {
                 //find account for operations
                 $debiter = $this->Post->findFirst('accounts', [
                     'conditions' => ['accountID' => $this->Request->post->debiter]
@@ -137,21 +144,21 @@ class PostsController extends Controller
                 $this->Request->post->accountID = $this->Request->post->debiter;
                 $this->Request->post->balance = $debit;
                 //save in database
-                $test = $this->Post->save('accounts',$this->Request->post);
+                $this->Post->save('accounts', $this->Request->post);
                 //define accountID & balance
                 $this->Request->post->accountID = $this->Request->post->credited;
                 $this->Request->post->balance = $credit;
                 //save in database
-                $this->Post->save('accounts',$this->Request->post);
+                $this->Post->save('accounts', $this->Request->post);
                 //message flash & redirect
                 $this->Session->setFlash('Le virement a été correctement effectué');
-                $this->Views->redirect(BASE_URL.'/pages/accounts');
+                $this->Views->redirect(BASE_URL . '/pages/accounts');
                 die();
-            }else{
-                $this->Session->setFlash("Vous ne pouvez pas faire de virements sur le même compte","danger");
+            } else {
+                $this->Session->setFlash("Vous ne pouvez pas faire de virements sur le même compte", "danger");
             }
         }
-        $this->Views->render('posts', 'transfer', compact('title','accounts'));
+        $this->Views->render('posts', 'transfer', compact('title', 'accounts'));
     }
 
     /**
@@ -159,24 +166,14 @@ class PostsController extends Controller
      */
     public function delete($id)
     {
+        dd($_POST);
+        $this->Session->isLogged('user');
         $this->loadModel('Post');
-        //find the current accounts
-        $account = $this->Post->findFirst('accounts', [
-            'conditions' => ['accountID' => $id]
-        ]);
-        $account = new Posts(get_object_vars($account));
-        //condition for delete
-        if ($account->getBalance() > 0) {
-            //delete
-            $this->Post->delete('accounts', $id);
-            //message & redirect
-            $this->Session->setFlash('Compte supprimer', 'danger');
-            $this->Views->redirect(BASE_URL . '/pages/accounts');
-            die();
-        } else {
-            $this->Session->setFlash('Le solde de votre compte est négatif', 'danger');
-            $this->Views->redirect(BASE_URL . '/pages/accounts');
-            die();
-        }
+        dd($this->Request->post);
+        $this->Post->delete('accounts', $id);
+        $this->Session->setFlash('Compte supprimer', 'danger');
+        $this->Views->redirect(BASE_URL . '/pages/accounts');
+
+
     }
 }

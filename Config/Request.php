@@ -7,6 +7,7 @@ class Request
 {
     public $post = false;
     public $file = false;
+    public $session = false;
 
     /**
      * Request constructor.
@@ -25,6 +26,13 @@ class Request
             $this->file = new stdClass();
             foreach($_FILES as $k=>$v){
                 $this->file->$k = $v;
+            }
+        }
+        //recover all session
+        if(!empty($_SESSION)){
+            $this->session = new stdClass();
+            foreach($_SESSION as $k=>$v){
+                $this->session->$k = $v;
             }
         }
     }

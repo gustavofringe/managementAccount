@@ -176,6 +176,7 @@ class Model
         if (isset($req['limit'])) {
             $sql .= ' LIMIT ' . $req['limit'];
         }
+        //return $sql;
         //prepare request
         $pre = $this->db->prepare($sql);
         //execute request

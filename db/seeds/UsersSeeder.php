@@ -3,7 +3,7 @@
 
 use Phinx\Seed\AbstractSeed;
 
-class AccountSeeder extends AbstractSeed
+class UsersSeeder extends AbstractSeed
 {
     /**
      * Run Method.

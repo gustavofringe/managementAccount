@@ -28,7 +28,7 @@ class Session
     {
         if (!isset($_SESSION[$user])) {
             $this->setFlash('Vous n\'avez pas accés a ce contenu', 'danger');
-            View::redirect(BASE_URL . '/admin/login');
+            View::redirect(BASE_URL);
             die();
         }
     }

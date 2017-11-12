@@ -29,7 +29,9 @@
                     <a class="nav-link" href="<?php echo BASE_URL; ?>/pages/accounts">Accueil<span class="sr-only">(current)</span></a>
                 </li>
                 <li class="nav-item active">
-                    <a class="nav-link" href="<?php echo BASE_URL; ?>/blog"></a>
+                    <?php if(isset($_SESSION['user'])):?>
+                        <a class="nav-link"  href="<?= BASE_URL; ?>/pages/logout">Se deconnecter</a>
+                    <?php endif; ?>
                 </li>
             </ul>
 
