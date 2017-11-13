@@ -7,7 +7,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
     <title>
-        <?php echo isset($title)?$title:'Comptes'; ?>
+        <?php echo isset($title) ? $title : 'Comptes'; ?>
     </title>
 
     <!-- Place favicon.ico in the root directory -->
@@ -20,9 +20,9 @@
 
 
 <div class="container">
-        <?php echo App\Session::flash(); ?>
+    <?php echo App\Session::flash(); ?>
 
-        <?php echo $content; ?>
+    <?php echo $content; ?>
 
 </div>
 

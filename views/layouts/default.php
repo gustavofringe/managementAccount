@@ -16,8 +16,6 @@
 </head>
 
 
-
-
 <body>
 <header>
     <nav class="navbar navbar-toggleable-md navbar-inverse bg-inverse fixed-top">
@@ -29,8 +27,8 @@
                     <a class="nav-link" href="<?php echo BASE_URL; ?>/pages/accounts">Accueil<span class="sr-only">(current)</span></a>
                 </li>
                 <li class="nav-item active">
-                    <?php if (isset($_SESSION['user'])) :?>
-                        <a class="nav-link"  href="<?= BASE_URL; ?>/pages/logout">Se deconnecter</a>
+                    <?php if (isset($_SESSION['user'])) : ?>
+                        <a class="nav-link" href="<?= BASE_URL; ?>/pages/logout">Se deconnecter</a>
                     <?php endif; ?>
                 </li>
             </ul>
@@ -54,9 +52,6 @@
 </header>
 
 
-
-
-
 <div class="container" id="container">
     <!-- /.header -->
     <?php echo App\Session::flash(); ?>
@@ -64,8 +59,6 @@
         <?php echo $content; ?>
     </main>
 </div>
-
-
 
 
 <footer class="footer">
@@ -77,8 +70,6 @@
         </div>
     </div>
 </footer>
-
-
 
 
 <script src="<?php echo BASE_URL; ?>/public/js/jquery-3.2.1.min.js"></script>

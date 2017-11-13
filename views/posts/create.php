@@ -1,5 +1,6 @@
 <h2 class="mt-5 text-center">Créer un nouveau compte</h2>
 <div class="row">
+    <!--form create account-->
     <div class="col-md-6">
         <?php
         App\Form::open();

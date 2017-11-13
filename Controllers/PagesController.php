@@ -26,7 +26,6 @@ class PagesController extends Controller
         $var['accounts'] = $this->Post->findAll('accounts', [
             'conditions' => 'userID=' . $this->Request->session->user->userID
         ]);
-
         foreach ($var['accounts'] as $k => $v) {
             $var['accounts'][$k] = new Pages(get_object_vars($v));
         }
@@ -37,24 +36,28 @@ class PagesController extends Controller
         }
 
         if ($this->Request->post) {
+            //find account to credit
             $credit = $this->Post->findFirst('accounts', [
-            'conditions' => ['accountID' => $this->Request->post->credited]
+                'conditions' => ['accountID' => $this->Request->post->credited]
             ]);
             $credit = new Pages(get_object_vars($credit));
+            //find account to debit
             $debit = $this->Post->findFirst('accounts', [
-            'conditions' => ['accountID' => $this->Request->post->accountID]
+                'conditions' => ['accountID' => $this->Request->post->accountID]
             ]);
             $debit = new Pages(get_object_vars($debit));
-
+            //
             $this->Request->post->balance = $credit->getBalance() + $debit->getBalance();
             $this->Request->post->accountID = $credit->getAccountID();
             if ($debit->getBalance() > 0) {
                 //dd($this->Request->post);
+                //update account
                 $this->Post->save('accounts', $this->Request->post);
+                //delete account
                 $this->Post->delete('accounts', $debit->getAccountID());
+                //redirect & message flash
                 $this->Session->setFlash('Compte supprimer', 'danger');
                 $this->Views->redirect(BASE_URL . '/pages/accounts');
-                //redirect
                 die();
             } else {
                 $this->Session->setFlash('Le solde de votre compte est négatif', 'danger');
@@ -62,8 +65,6 @@ class PagesController extends Controller
                 die();
             }
         }
-
-
         $this->Views->render('pages', 'accounts', $var);
     }
 
@@ -74,19 +75,19 @@ class PagesController extends Controller
      */
     public function modal($id)
     {
-            $title = 'clôture de compte';
-            $this->loadModel('Post');
-            $account = $this->Post->findFirst('accounts', [
-                'conditions' => 'accountID=' . $id
-            ]);
-            $account = new Pages(get_object_vars($account));
-            $accounts = $this->Post->findAll('accounts', []);
+        $this->loadModel('Post');
+        //find account with id
+        $account = $this->Post->findFirst('accounts', [
+            'conditions' => 'accountID=' . $id
+        ]);
+        $account = new Pages(get_object_vars($account));
+        $accounts = $this->Post->findAll('accounts', []);
         foreach ($accounts as $k => $v) {
             $accounts[$k] = new Pages(get_object_vars($v));
         }
 
-            $this->Views->layout = "modal";
-            $this->Views->render('pages', 'modal', compact('title', 'account', 'accounts'));
+        $this->Views->layout = "modal";
+        $this->Views->render('pages', 'modal', compact('account', 'accounts'));
     }
 
     /**
