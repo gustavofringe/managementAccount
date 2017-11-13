@@ -5,7 +5,7 @@
     <div class="col-md-12">
         <div class="table-responsive">
             <!--start table-->
-            <table class="table table-bordered table-hover mb-5">
+            <table id="table" class="table table-bordered table-hover mb-5">
                 <thead>
                 <tr>
                     <th scope="col">Compte(s)</th>
@@ -15,7 +15,7 @@
                 </thead>
                 <tbody>
                 <!--get datas-->
-                <?php foreach ($accounts as $account): ?>
+                <?php foreach ($accounts as $account) : ?>
 
                     <tr>
                         <th><?php echo $account->getName(); ?></th>
@@ -29,11 +29,10 @@
                                    href="<?php echo BASE_URL; ?>/posts/add/<?php echo $account->getAccountID(); ?>">Créditer</a>
                                 <a class="btn btn-secondary mt-1"
                                    href="<?php echo BASE_URL; ?>/posts/sub/<?php echo $account->getAccountID(); ?>">Débiter</a>
-                                <?php if ($count > 1): ?>
-                                    <a href="" class="btn btn-danger mt-1 LienModal" data-target="#exampleModal"
+                                <?php if ($count > 1) : ?>
+                                    <a href="" class="btn btn-danger mt-1 LinkModal" data-target="#exampleModal"
                                        data-toggle="modal" rel="<?php echo $account->getAccountID(); ?>">
                                         Supprimer
-
                                     </a>
                                 <?php endif; ?>
                             </div>
@@ -51,7 +50,6 @@
      aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
-
         </div>
     </div>
 </div>

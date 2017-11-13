@@ -28,8 +28,8 @@ App\Form::open();
     <div class="form-group">
         <label for="exampleFormControlSelect1">Compte a créditer avant fermeture</label>
         <select class="form-control" id="exampleFormControlSelect1" name="credited">
-            <?php foreach($accounts as $accounti):?>
-                <?php if($accounti->getAccountID() !== $_GET['Id']):?>
+            <?php foreach ($accounts as $accounti) :?>
+                <?php if ($accounti->getAccountID() !== $_GET['Id']) :?>
                     <option value="<?php echo $accounti->getAccountID();?>"><?php echo $accounti->getName();?> (<?php echo $accounti->getBalance();?> €) </option>
                 <?php endif;?>
             <?php endforeach;?>

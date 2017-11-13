@@ -9,32 +9,31 @@
     <link href="https://fonts.googleapis.com/css?family=Raleway:100,600" rel="stylesheet" type="text/css">
     <link href="https://fonts.googleapis.com/css?family=Maven+Pro" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Didact+Gothic|Maven+Pro" rel="stylesheet">
-
     <!-- Place favicon.ico in the root directory -->
     <link rel="icon" href="<?php echo BASE_URL; ?>/public/img/favicon.ico"/>
     <link rel="stylesheet" href="<?php echo BASE_URL; ?>/public/css/bootstrap.css">
     <link rel="stylesheet" href="<?php echo BASE_URL; ?>/public/css/main.css">
 </head>
+
+
+
+
 <body>
-
-<header class="">
-    <nav class="navbar navbar-toggleable-md navbar-inverse bg-inverse">
-
-
+<header>
+    <nav class="navbar navbar-toggleable-md navbar-inverse bg-inverse fixed-top">
         <h1 class="navbar-brand mr-5 title">Gestion de compte bancaire</h1>
         <div class="collapse navbar-collapse" id="navbarsExampleDefault">
             <ul class="navbar-nav mr-auto">
-                <?php if ($_REQUEST['url']): ?>
+                <?php if ($_REQUEST['url']) : ?>
                 <li class="nav-item active">
                     <a class="nav-link" href="<?php echo BASE_URL; ?>/pages/accounts">Accueil<span class="sr-only">(current)</span></a>
                 </li>
                 <li class="nav-item active">
-                    <?php if(isset($_SESSION['user'])):?>
+                    <?php if (isset($_SESSION['user'])) :?>
                         <a class="nav-link"  href="<?= BASE_URL; ?>/pages/logout">Se deconnecter</a>
                     <?php endif; ?>
                 </li>
             </ul>
-
             <ul class="my-2 my-lg-0 navbar-nav">
                 <li class="nav-item active">
                     <a class="nav-link" href="<?php echo BASE_URL; ?>/posts/transfer">Virements<span
@@ -54,16 +53,21 @@
     </nav>
 </header>
 
+
+
+
+
 <div class="container" id="container">
     <!-- /.header -->
     <?php echo App\Session::flash(); ?>
-
-
     <main>
         <?php echo $content; ?>
     </main>
-
 </div>
+
+
+
+
 <footer class="footer">
     <div class="container">
         <div class="row">
@@ -73,9 +77,13 @@
         </div>
     </div>
 </footer>
-<script src="<?php echo BASE_URL; ?>/public/js/jquery-3.2.1.min.js"></script>
 
+
+
+
+<script src="<?php echo BASE_URL; ?>/public/js/jquery-3.2.1.min.js"></script>
 <script src="<?php echo BASE_URL; ?>/public/js/bootstrap.js"></script>
+<script src="<?php echo BASE_URL; ?>/public/js/stacktable.js"></script>
 <script src="<?php echo BASE_URL; ?>/public/js/main.js"></script>
 
 <!-- Google Analytics: change UA-XXXXX-X to be your site's ID. -->

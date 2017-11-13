@@ -10,9 +10,9 @@ use function print_r;
 class PagesController extends Controller
 {
 
-
     /**
-     *
+     * accounts
+     * @return mixed
      */
     public function accounts()
     {
@@ -30,43 +30,49 @@ class PagesController extends Controller
         foreach ($var['accounts'] as $k => $v) {
             $var['accounts'][$k] = new Pages(get_object_vars($v));
         }
+        //define session getAccount for display no error
         $var['count'] = count($var['accounts']);
         if ($var['count'] === 0) {
             $this->Session->write('getAccount', false);
         }
 
-            if ($this->Request->post) {
-                $credit = $this->Post->findFirst('accounts', [
-                    'conditions' => ['accountID' => $this->Request->post->credited]
-                ]);
-                $credit = new Pages(get_object_vars($credit));
-                $debit = $this->Post->findFirst('accounts', [
-                    'conditions' => ['accountID' => $this->Request->post->accountID]
-                ]);
-                $debit = new Pages(get_object_vars($debit));
+        if ($this->Request->post) {
+            $credit = $this->Post->findFirst('accounts', [
+            'conditions' => ['accountID' => $this->Request->post->credited]
+            ]);
+            $credit = new Pages(get_object_vars($credit));
+            $debit = $this->Post->findFirst('accounts', [
+            'conditions' => ['accountID' => $this->Request->post->accountID]
+            ]);
+            $debit = new Pages(get_object_vars($debit));
 
-                $this->Request->post->balance = $credit->getBalance() + $debit->getBalance();
-                $this->Request->post->accountID = $credit->getAccountID();
-                if ($debit->getBalance() > 0) {
-                    //dd($this->Request->post);
-                    $this->Post->save('accounts', $this->Request->post);
-                    $this->Post->delete('accounts', $debit->getAccountID());
-                    $this->Session->setFlash('Compte supprimer', 'danger');
-                    $this->Views->redirect(BASE_URL . '/pages/accounts');
-                    //redirect
-                    die();
-                } else {
-                    $this->Session->setFlash('Le solde de votre compte est négatif', 'danger');
-                    $this->Views->redirect(BASE_URL . '/pages/accounts');
-                    die();
-                }
+            $this->Request->post->balance = $credit->getBalance() + $debit->getBalance();
+            $this->Request->post->accountID = $credit->getAccountID();
+            if ($debit->getBalance() > 0) {
+                //dd($this->Request->post);
+                $this->Post->save('accounts', $this->Request->post);
+                $this->Post->delete('accounts', $debit->getAccountID());
+                $this->Session->setFlash('Compte supprimer', 'danger');
+                $this->Views->redirect(BASE_URL . '/pages/accounts');
+                //redirect
+                die();
+            } else {
+                $this->Session->setFlash('Le solde de votre compte est négatif', 'danger');
+                $this->Views->redirect(BASE_URL . '/pages/accounts');
+                die();
             }
+        }
 
 
         $this->Views->render('pages', 'accounts', $var);
     }
 
-    public function reponse($id)
+    /**
+     * modal
+     * @param mixed $id
+     * @return mixed
+     */
+    public function modal($id)
     {
             $title = 'clôture de compte';
             $this->loadModel('Post');
@@ -75,15 +81,18 @@ class PagesController extends Controller
             ]);
             $account = new Pages(get_object_vars($account));
             $accounts = $this->Post->findAll('accounts', []);
-            foreach ($accounts as $k => $v) {
-                $accounts[$k] = new Pages(get_object_vars($v));
-            }
+        foreach ($accounts as $k => $v) {
+            $accounts[$k] = new Pages(get_object_vars($v));
+        }
 
             $this->Views->layout = "modal";
-            $this->Views->render('pages', 'reponse', compact('title', 'account', 'accounts'));
-
+            $this->Views->render('pages', 'modal', compact('title', 'account', 'accounts'));
     }
 
+    /**
+     * logout
+     * @return mixed
+     */
     public function logout()
     {
         $this->Session->logout('user');

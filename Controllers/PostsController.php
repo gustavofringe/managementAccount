@@ -173,7 +173,5 @@ class PostsController extends Controller
         $this->Post->delete('accounts', $id);
         $this->Session->setFlash('Compte supprimer', 'danger');
         $this->Views->redirect(BASE_URL . '/pages/accounts');
-
-
     }
 }

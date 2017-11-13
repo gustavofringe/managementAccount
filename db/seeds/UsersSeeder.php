@@ -16,5 +16,19 @@ class UsersSeeder extends AbstractSeed
     public function run()
     {
 
+        $filename =  'db/seeds/users.json';
+        $file = fopen($filename, 'r');
+        $contents = fread($file, filesize($filename));
+        $cont = json_decode($contents, true);
+        // dd($cont);
+        $contacts = [];
+        foreach ($cont as $k => $v) {
+            $contacts[] = [
+                'userID' => $v['userID'],
+                'name' => $v['name'],
+                'password' => $v['password']
+            ];
+        }
+        $this->insert('users', $contacts);
     }
 }

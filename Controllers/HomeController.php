@@ -1,22 +1,31 @@
 <?php
 namespace Http;
+
 use App\Controller;
+
 class HomeController extends Controller
 {
 
     /**
-     *
+     * index
+     * @return mixed
      */
-    public function index(){
+    public function index()
+    {
+        //title page
         $title = "Accueil";
         $this->loadModel('User');
-        if($this->Request->post){
+        //load model user
+        if ($this->Request->post) {
+            //hash password
             $password = $this->Service->hashPass($this->Request->post->password);
+            //search users
             $users = $this->User->findAll('users', [
                 'name' => $this->Request->post->name,
                 'password' => $password
             ]);
-            foreach($users as $user) {
+            //verify user password
+            foreach ($users as $user) {
                 if ($password == $user->password) {
                     $this->Session->write('user', $user);
                     $this->Session->write('getAccount', true);
@@ -28,6 +37,6 @@ class HomeController extends Controller
                 }
             }
         }
-        $this->Views->render('pages', 'index',compact('title'));
+        $this->Views->render('pages', 'index', compact('title'));
     }
 }

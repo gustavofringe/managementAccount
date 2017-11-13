@@ -28,11 +28,11 @@ class ManagementAccountTable extends AbstractMigration
      */
     public function change()
     {
-        $this->table('accounts',['id'=>'accountID'])
-            ->addColumn('name','string')
-            ->addColumn('balance','string')
-            ->addColumn('credited','integer')
-            ->addColumn('debiter','integer')
+        $this->table('accounts', ['id'=>'accountID'])
+            ->addColumn('name', 'string')
+            ->addColumn('balance', 'decimal', array('precision' => 15, 'scale' => 2))
+            ->addColumn('credited', 'integer')
+            ->addColumn('debiter', 'integer')
             ->create();
     }
 }
